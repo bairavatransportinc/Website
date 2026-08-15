@@ -9,13 +9,15 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <Image
-              src="/images/logo.png"
-              alt={company.name}
-              width={220}
-              height={96}
-              style={{ height: 48, width: "auto" }}
-            />
+            <span className="footer-logo-chip">
+              <Image
+                src="/images/logo.png"
+                alt={company.name}
+                width={220}
+                height={96}
+                style={{ height: 36, width: "auto" }}
+              />
+            </span>
             <p>{company.description}</p>
           </div>
 
@@ -58,7 +60,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>
-            © {year} {company.name}. All rights reserved.
+            © {year} {company.name} All rights reserved.
           </span>
           <span>
             Ontario Business Corp. · BN {company.businessNumber} · Registry ID{" "}
