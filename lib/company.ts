@@ -18,10 +18,9 @@ export const company = {
   incorporatedDate: "2023-02-24",
 
   contact: {
-    // Update these with real contact details when available.
     email: "contactus@bairavatransport.ca",
-    phone: "+1 (000) 000-0000",
-    address: "Brampton, Ontario, Canada",
+    phone: "+1 (647) 871-9003",
+    address: "61 Circus Cres, Brampton, ON L7A 5E1, Canada",
     hours: "24/7 Dispatch",
   },
 } as const;
