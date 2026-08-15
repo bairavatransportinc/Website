@@ -19,7 +19,7 @@ export const company = {
 
   contact: {
     // Update these with real contact details when available.
-    email: "dispatch@bairavatransport.ca",
+    email: "contactus@bairavatransport.ca",
     phone: "+1 (000) 000-0000",
     address: "Brampton, Ontario, Canada",
     hours: "24/7 Dispatch",
