@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
@@ -21,65 +20,52 @@ export default function Home() {
 
       {/* ---------------- HERO ---------------- */}
       <section className="hero">
-        <div className="hero-backdrop" aria-hidden="true" />
-        <div className="container hero-grid">
-          <div>
-            <span className="eyebrow">Brampton, Ontario · Canada &amp; US</span>
-            <h1 className="hero-title" aria-label="Freight that moves with the pack.">
-              {"Freight that moves with the".split(" ").map((w, i) => (
-                <span className="word" style={{ ["--i" as string]: i }} key={i}>
-                  <span>{w}</span>
-                </span>
-              ))}
-              <span className="word" style={{ ["--i" as string]: 5 }}>
-                <span className="accent">pack.</span>
-              </span>
-            </h1>
-            <p className="lead">
-              {company.shortName} delivers reliable, on-time full-truckload and
-              cross-border freight across Canada and the United States. Fast,
-              tracked, and driven by people who care about your deadline.
-            </p>
-            <div className="hero-actions">
-              <a href="#contact" className="btn btn-amber">
-                Get a Free Quote <ArrowIcon />
-              </a>
-              <a href="#services" className="btn btn-ghost">
-                Explore Services
-              </a>
-            </div>
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="container hero-inner">
+          <span className="hero-pill">
+            <span className="tag">Active</span>
+            Brampton, Ontario · Canada &amp; US carrier
+          </span>
 
-            <div className="hero-badges">
-              <div className="hero-badge">
-                <strong>24/7</strong>
-                <span>Dispatch</span>
-              </div>
-              <div className="hero-badge">
-                <strong>Cross-Border</strong>
-                <span>CA ↔ US</span>
-              </div>
-              <div className="hero-badge">
-                <strong>Active</strong>
-                <span>Ontario Corp.</span>
-              </div>
-            </div>
+          <h1 className="hero-title" aria-label="Freight that moves with the pack.">
+            {"Freight that moves".split(" ").map((w, i) => (
+              <span className="word" style={{ ["--i" as string]: i }} key={i}>
+                <span>{w}</span>
+              </span>
+            ))}
+            <span className="word" style={{ ["--i" as string]: 3 }}>
+              <span>with</span>
+            </span>
+            <span className="word" style={{ ["--i" as string]: 4 }}>
+              <span>the</span>
+            </span>
+            <span className="word" style={{ ["--i" as string]: 5 }}>
+              <span className="accent">pack.</span>
+            </span>
+          </h1>
+
+          <p className="lead">
+            {company.shortName} delivers reliable, on-time full-truckload and
+            cross-border freight across Canada and the United States — fast,
+            tracked, and backed by 24/7 dispatch.
+          </p>
+
+          <div className="hero-actions">
+            <a href="#contact" className="btn btn-primary">
+              Get a Free Quote <ArrowIcon />
+            </a>
+            <a href="#services" className="btn btn-ghost">
+              Explore Services
+            </a>
           </div>
 
-          <div className="hero-visual">
-            <div className="hero-visual-card">
-              <div className="speed-lines" aria-hidden="true">
-                <span />
-                <span />
-                <span />
+          <div className="hero-trust">
+            {stats.map((s) => (
+              <div className="item" key={s.label}>
+                <strong>{s.value}</strong>
+                <span>{s.label}</span>
               </div>
-              <Image
-                src="/images/logo.png"
-                alt={`${company.name} logo`}
-                width={520}
-                height={380}
-                priority
-              />
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -88,10 +74,7 @@ export default function Home() {
       <div className="strip" aria-hidden="true">
         <div className="strip-track">
           {[...Array(2)].map((_, dup) => (
-            <div
-              key={dup}
-              style={{ display: "flex", gap: 48 }}
-            >
+            <div key={dup} style={{ display: "flex", gap: 56 }}>
               <span className="strip-item">Full Truckload</span>
               <span className="strip-item">Cross-Border Freight</span>
               <span className="strip-item">Dry Van</span>
@@ -102,20 +85,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      {/* ---------------- STATS ---------------- */}
-      <section className="section-pad">
-        <div className="container">
-          <div className="stats">
-            {stats.map((s) => (
-              <div className="stat-card" key={s.label}>
-                <div className="num">{s.value}</div>
-                <div className="lbl">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ---------------- SERVICES ---------------- */}
       <section id="services" className="section-pad">

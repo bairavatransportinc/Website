@@ -16,70 +16,62 @@ export default function Header() {
 
   return (
     <header className="site-header">
-      <div className="container nav">
-        <a href="#top" className="nav-logo" aria-label={`${company.name} home`}>
-          <Image
-            src="/images/logo.png"
-            alt={company.name}
-            width={200}
-            height={88}
-            priority
-            style={{ height: 44, width: "auto" }}
-          />
-        </a>
-
-        <nav aria-label="Primary">
-          <ul className="nav-links">
-            {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="nav-cta">
-          <a href="#about" className="btn btn-ghost">
-            Our Credentials
+      <div className="container">
+        <div className="nav-pill">
+          <a href="#top" className="nav-logo" aria-label={`${company.name} home`}>
+            <Image
+              src="/images/logo.png"
+              alt={company.name}
+              width={180}
+              height={78}
+              priority
+              style={{ height: 34, width: "auto" }}
+            />
           </a>
-          <a href="#contact" className="btn btn-primary">
-            Get a Quote
-          </a>
-          <button
-            className="mobile-toggle"
-            aria-label="Toggle menu"
-            aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? "✕" : "☰"}
-          </button>
-        </div>
-      </div>
 
-      {open && (
-        <div
-          className="container"
-          style={{ paddingBottom: 20, display: "grid", gap: 12 }}
-        >
-          {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              style={{ color: "var(--fg-muted)", fontWeight: 600 }}
-            >
-              {l.label}
+          <nav aria-label="Primary">
+            <ul className="nav-links">
+              {links.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href}>{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="nav-cta">
+            <a href="#contact" className="btn btn-primary">
+              Get a Quote
             </a>
-          ))}
-          <a
-            href="#contact"
-            className="btn btn-primary"
-            onClick={() => setOpen(false)}
-          >
-            Get a Quote
-          </a>
+            <button
+              className="mobile-toggle"
+              aria-label="Toggle menu"
+              aria-expanded={open}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? "✕" : "☰"}
+            </button>
+          </div>
         </div>
-      )}
+
+        {open && (
+          <div className="mobile-menu">
+            {links.map((l) => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                {l.label}
+              </a>
+            ))}
+            <a
+              href="#contact"
+              className="btn btn-primary"
+              style={{ justifyContent: "center", marginTop: 6 }}
+              onClick={() => setOpen(false)}
+            >
+              Get a Quote
+            </a>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
