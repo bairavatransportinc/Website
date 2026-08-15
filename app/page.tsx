@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
+import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 import {
   iconMap,
   ShieldIcon,
@@ -62,7 +64,9 @@ export default function Home() {
           <div className="hero-trust">
             {stats.map((s) => (
               <div className="item" key={s.label}>
-                <strong>{s.value}</strong>
+                <strong>
+                  <CountUp value={s.value} />
+                </strong>
                 <span>{s.label}</span>
               </div>
             ))}
@@ -89,26 +93,35 @@ export default function Home() {
       {/* ---------------- SERVICES ---------------- */}
       <section id="services" className="section-pad">
         <div className="container">
-          <span className="eyebrow">What We Haul</span>
-          <h2 className="section-title">
-            Freight solutions built for reliability
-          </h2>
-          <p className="section-lead">
-            Whatever you're shipping and wherever it's headed, we have the
-            capacity and the discipline to get it there safely and on schedule.
-          </p>
+          <Reveal variant="up">
+            <span className="eyebrow">What We Haul</span>
+            <h2 className="section-title">
+              <span className="title-underline">Freight solutions</span> built for
+              reliability
+            </h2>
+            <p className="section-lead">
+              Whatever you're shipping and wherever it's headed, we have the
+              capacity and the discipline to get it there safely and on
+              schedule.
+            </p>
+          </Reveal>
 
           <div className="services-grid">
-            {services.map((svc) => {
+            {services.map((svc, i) => {
               const Icon = iconMap[svc.icon as keyof typeof iconMap];
               return (
-                <div className="service-card" key={svc.title}>
+                <Reveal
+                  variant="up"
+                  delay={i * 90}
+                  className="service-card"
+                  key={svc.title}
+                >
                   <div className="service-icon">
                     <Icon size={26} />
                   </div>
                   <h3>{svc.title}</h3>
                   <p>{svc.description}</p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -118,19 +131,28 @@ export default function Home() {
       {/* ---------------- FLEET ---------------- */}
       <section id="fleet" className="fleet section-pad">
         <div className="container">
-          <span className="eyebrow">Our Equipment</span>
-          <h2 className="section-title">A fleet built to keep its promise</h2>
-          <p className="section-lead">
-            Well-maintained, safety-inspected equipment ready for the lanes you
-            run. Don&apos;t see exactly what you need? Ask us — we&apos;ll find
-            the right capacity.
-          </p>
+          <Reveal variant="up">
+            <span className="eyebrow">Our Equipment</span>
+            <h2 className="section-title">
+              A fleet built to <span className="title-underline">keep its promise</span>
+            </h2>
+            <p className="section-lead">
+              Well-maintained, safety-inspected equipment ready for the lanes
+              you run. Don&apos;t see exactly what you need? Ask us — we&apos;ll
+              find the right capacity.
+            </p>
+          </Reveal>
 
           <div className="fleet-grid">
-            {fleet.map((unit) => {
+            {fleet.map((unit, i) => {
               const Icon = iconMap[unit.icon as keyof typeof iconMap];
               return (
-                <div className="fleet-card" key={unit.name}>
+                <Reveal
+                  variant="up"
+                  delay={i * 110}
+                  className="fleet-card"
+                  key={unit.name}
+                >
                   <div className="fleet-card-head">
                     <span className="fleet-icon">
                       <Icon size={24} />
@@ -139,7 +161,7 @@ export default function Home() {
                   </div>
                   <span className="fleet-spec">{unit.specs}</span>
                   <p>{unit.description}</p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -149,10 +171,11 @@ export default function Home() {
       {/* ---------------- ABOUT + CREDENTIALS ---------------- */}
       <section id="about" className="about section-pad">
         <div className="container about-grid">
-          <div>
+          <Reveal variant="left">
             <span className="eyebrow">Who We Are</span>
             <h2 className="section-title">
-              A registered Ontario carrier you can trust
+              A registered Ontario carrier you can{" "}
+              <span className="title-underline">trust</span>
             </h2>
             <p className="section-lead">
               {company.name} is a Brampton-based transport company built on a
@@ -174,10 +197,10 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           {/* Real incorporation credentials from the Ontario registry */}
-          <div className="credentials">
+          <Reveal variant="right" className="credentials">
             <span className="verified">✓ Verified · Ontario Business Registry</span>
             <h3>{company.name}</h3>
             <div style={{ marginTop: 18 }}>
@@ -208,14 +231,14 @@ export default function Home() {
                 <span className="v">{company.incorporatedDate}</span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ---------------- WHY / CTA BAND ---------------- */}
       <section id="why" className="section-pad">
         <div className="container">
-          <div className="cta-band">
+          <Reveal variant="scale" className="cta-band">
             <h2>Ready to move your freight?</h2>
             <p>
               Tell us where it's going. Our dispatch team will get you a quick,
@@ -232,23 +255,27 @@ export default function Home() {
                 Call Dispatch
               </a>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ---------------- CONTACT ---------------- */}
       <section id="contact" className="section-pad">
         <div className="container">
-          <span className="eyebrow">Get in Touch</span>
-          <h2 className="section-title">Request a quote</h2>
-          <p className="section-lead">
-            Fill out the form and a dispatcher will reach out with pricing and
-            availability. Prefer to talk? Our lines are open 24/7.
-          </p>
+          <Reveal variant="up">
+            <span className="eyebrow">Get in Touch</span>
+            <h2 className="section-title">
+              Request a <span className="title-underline">quote</span>
+            </h2>
+            <p className="section-lead">
+              Fill out the form and a dispatcher will reach out with pricing and
+              availability. Prefer to talk? Our lines are open 24/7.
+            </p>
+          </Reveal>
 
           <div className="contact-grid" style={{ marginTop: 48 }}>
             <div className="contact-info">
-              <div className="contact-item">
+              <Reveal variant="left" delay={0} className="contact-item">
                 <span className="ci-icon">
                   <PhoneIcon size={20} />
                 </span>
@@ -256,8 +283,8 @@ export default function Home() {
                   <div className="k">Phone</div>
                   <div className="v">{company.contact.phone}</div>
                 </div>
-              </div>
-              <div className="contact-item">
+              </Reveal>
+              <Reveal variant="left" delay={80} className="contact-item">
                 <span className="ci-icon">
                   <MailIcon size={20} />
                 </span>
@@ -265,8 +292,8 @@ export default function Home() {
                   <div className="k">Email</div>
                   <div className="v">{company.contact.email}</div>
                 </div>
-              </div>
-              <div className="contact-item">
+              </Reveal>
+              <Reveal variant="left" delay={160} className="contact-item">
                 <span className="ci-icon">
                   <PinIcon size={20} />
                 </span>
@@ -274,8 +301,8 @@ export default function Home() {
                   <div className="k">Location</div>
                   <div className="v">{company.contact.address}</div>
                 </div>
-              </div>
-              <div className="contact-item">
+              </Reveal>
+              <Reveal variant="left" delay={240} className="contact-item">
                 <span className="ci-icon">
                   <ClockIcon size={20} />
                 </span>
@@ -283,10 +310,12 @@ export default function Home() {
                   <div className="k">Hours</div>
                   <div className="v">{company.contact.hours}</div>
                 </div>
-              </div>
+              </Reveal>
             </div>
 
-            <QuoteForm />
+            <Reveal variant="right">
+              <QuoteForm />
+            </Reveal>
           </div>
         </div>
       </section>

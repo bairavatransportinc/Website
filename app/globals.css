@@ -23,6 +23,10 @@
   --shadow-md: 0 16px 40px rgba(16, 24, 64, 0.1);
   --shadow-lg: 0 30px 70px rgba(16, 24, 64, 0.14);
 
+  /* Framer-style easing */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
 }
@@ -900,5 +904,272 @@ section {
   }
   .hero-trust {
     gap: 28px;
+  }
+}
+
+/* =====================================================
+   FRAMER-STYLE ANIMATION LAYER
+   ===================================================== */
+
+/* ---- Scroll reveal (blur + drift, spring easing) ---- */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.9s var(--ease-spring), transform 0.9s var(--ease-spring),
+    filter 0.9s var(--ease-spring);
+  will-change: opacity, transform, filter;
+}
+.reveal-up {
+  transform: translateY(38px);
+  filter: blur(8px);
+}
+.reveal-left {
+  transform: translateX(-46px);
+  filter: blur(8px);
+}
+.reveal-right {
+  transform: translateX(46px);
+  filter: blur(8px);
+}
+.reveal-scale {
+  transform: scale(0.94);
+  filter: blur(6px);
+}
+.reveal-fade {
+  filter: blur(6px);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+
+/* ---- Premium hover on cards (lift + subtle tilt of icon) ---- */
+.service-card,
+.fleet-card {
+  transition: transform 0.4s var(--ease-spring),
+    border-color 0.3s var(--ease-smooth), box-shadow 0.4s var(--ease-spring);
+}
+.service-card:hover,
+.fleet-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 60px rgba(16, 24, 64, 0.14);
+}
+.service-icon,
+.fleet-icon {
+  transition: transform 0.45s var(--ease-spring), background 0.3s ease,
+    color 0.3s ease;
+}
+.service-card:hover .service-icon,
+.fleet-card:hover .fleet-icon {
+  transform: translateY(-3px) rotate(-6deg) scale(1.08);
+  background: var(--blue-500);
+  color: #fff;
+}
+
+/* ---- Buttons: shine sweep + spring press ---- */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-spring),
+    background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.6s var(--ease-smooth);
+  pointer-events: none;
+}
+.btn:hover::after {
+  left: 140%;
+}
+.btn-ghost::after {
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(47, 91, 255, 0.14),
+    transparent
+  );
+}
+
+/* ---- Animated mesh gradient behind the hero ---- */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 90%;
+  z-index: 0;
+  background: radial-gradient(
+      40% 50% at 20% 20%,
+      rgba(47, 91, 255, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      36% 46% at 82% 18%,
+      rgba(91, 130, 255, 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      44% 50% at 60% 60%,
+      rgba(255, 157, 0, 0.08),
+      transparent 60%
+    );
+  filter: blur(20px);
+  animation: meshFloat 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes meshFloat {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-3%, 2%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(3%, -2%, 0) scale(1.03);
+  }
+}
+
+/* ---- Hero pill: gentle breathing glow ---- */
+.hero-pill {
+  box-shadow: 0 0 0 0 rgba(47, 91, 255, 0);
+  animation: fadeUp 0.7s ease forwards, pillGlow 3.4s ease-in-out 1s infinite;
+}
+@keyframes pillGlow {
+  0%,
+  100% {
+    box-shadow: var(--shadow-sm), 0 0 0 0 rgba(47, 91, 255, 0);
+  }
+  50% {
+    box-shadow: var(--shadow-sm), 0 0 22px 2px rgba(47, 91, 255, 0.18);
+  }
+}
+
+/* ---- Hero trust stats: pop on reveal ---- */
+.hero-trust .item strong {
+  transition: transform 0.3s var(--ease-spring);
+}
+.hero-trust .item:hover strong {
+  transform: scale(1.12);
+  color: var(--blue-600);
+}
+
+/* ---- Section titles: animated underline accent on reveal ---- */
+.title-underline {
+  position: relative;
+  display: inline-block;
+}
+.title-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 4px;
+  width: 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+  transition: width 0.9s var(--ease-spring) 0.2s;
+}
+.reveal.is-visible .title-underline::after,
+.title-underline.is-visible::after {
+  width: 74px;
+}
+
+/* ---- Nav pill: subtle entrance ---- */
+.nav-pill {
+  animation: navDrop 0.8s var(--ease-spring) both;
+}
+@keyframes navDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Credentials card: floaty ---- */
+.credentials {
+  transition: transform 0.5s var(--ease-spring), box-shadow 0.5s var(--ease-spring);
+}
+.credentials:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- CTA band: shimmering sheen ---- */
+.cta-band::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.14),
+    transparent
+  );
+  transform: skewX(-18deg);
+  animation: ctaSheen 6s ease-in-out 2s infinite;
+  pointer-events: none;
+}
+@keyframes ctaSheen {
+  0% {
+    left: -60%;
+  }
+  35%,
+  100% {
+    left: 130%;
+  }
+}
+
+/* ---- Contact items slide accent ---- */
+.contact-item {
+  transition: transform 0.35s var(--ease-spring), border-color 0.3s ease,
+    box-shadow 0.35s var(--ease-spring);
+}
+.contact-item:hover {
+  transform: translateX(6px);
+  border-color: var(--blue-400);
+  box-shadow: var(--shadow-md);
+}
+.contact-item:hover .ci-icon {
+  background: var(--blue-500);
+  color: #fff;
+}
+.ci-icon {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ---- Respect reduced motion everywhere ---- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .hero::before,
+  .hero-pill,
+  .cta-band::after,
+  .nav-pill {
+    animation: none !important;
+  }
+  .btn::after {
+    display: none;
   }
 }
