@@ -96,6 +96,24 @@ export const fleet = [
   },
 ] as const;
 
+// Coverage / lanes. Edit lanes to reflect your busiest routes.
+export const coverage = {
+  regions: [
+    "Ontario",
+    "Quebec",
+    "Great Lakes",
+    "Midwest US",
+    "Northeast US",
+    "Texas & South",
+  ],
+  lanes: [
+    { from: "Toronto, ON", to: "Chicago, IL" },
+    { from: "Brampton, ON", to: "Detroit, MI" },
+    { from: "Montreal, QC", to: "New York, NY" },
+    { from: "Ontario", to: "Texas" },
+  ],
+} as const;
+
 export const whyChooseUs = [
   {
     title: "Licensed & Incorporated",

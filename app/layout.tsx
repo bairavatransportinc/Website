@@ -56,6 +56,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        {/* Mark JS as available before paint so scroll-reveal can hide
+            content only when it can also reveal it (no blank sections). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js');`,
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

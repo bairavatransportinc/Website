@@ -31,6 +31,9 @@ export default function Footer() {
                 <a href="#fleet">Fleet</a>
               </li>
               <li>
+                <a href="#coverage">Coverage</a>
+              </li>
+              <li>
                 <a href="#about">About Us</a>
               </li>
               <li>

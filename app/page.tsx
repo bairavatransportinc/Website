@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import HeroTruck from "@/components/HeroTruck";
+import CoverageMap from "@/components/CoverageMap";
 import {
   iconMap,
   ShieldIcon,
@@ -12,7 +14,14 @@ import {
   PinIcon,
   ClockIcon,
 } from "@/components/Icons";
-import { company, services, stats, whyChooseUs, fleet } from "@/lib/company";
+import {
+  company,
+  services,
+  stats,
+  whyChooseUs,
+  fleet,
+  coverage,
+} from "@/lib/company";
 
 export default function Home() {
   return (
@@ -71,6 +80,8 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          <HeroTruck />
         </div>
       </section>
 
@@ -165,6 +176,46 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- COVERAGE ---------------- */}
+      <section id="coverage" className="coverage section-pad">
+        <div className="container coverage-grid">
+          <Reveal variant="left">
+            <span className="eyebrow">Where We Run</span>
+            <h2 className="section-title">
+              Coverage across{" "}
+              <span className="title-underline">Canada &amp; the US</span>
+            </h2>
+            <p className="section-lead">
+              From our Brampton base we run freight throughout Ontario and Quebec
+              and cross-border into the US heartland — the Great Lakes, Midwest,
+              Northeast, and down to Texas.
+            </p>
+
+            <div className="coverage-regions">
+              {coverage.regions.map((r) => (
+                <span className="coverage-chip" key={r}>
+                  {r}
+                </span>
+              ))}
+            </div>
+
+            <div className="coverage-lanes">
+              {coverage.lanes.map((lane) => (
+                <div className="lane-row" key={`${lane.from}-${lane.to}`}>
+                  <span className="from">{lane.from}</span>
+                  <span className="arrow" />
+                  <span className="to">{lane.to}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal variant="right">
+            <CoverageMap />
+          </Reveal>
         </div>
       </section>
 
