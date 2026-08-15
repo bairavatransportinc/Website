@@ -21,12 +21,19 @@ export default function Home() {
 
       {/* ---------------- HERO ---------------- */}
       <section className="hero">
+        <div className="hero-backdrop" aria-hidden="true" />
         <div className="container hero-grid">
           <div>
             <span className="eyebrow">Brampton, Ontario · Canada &amp; US</span>
-            <h1>
-              Freight that moves with the{" "}
-              <span className="accent">pack.</span>
+            <h1 className="hero-title" aria-label="Freight that moves with the pack.">
+              {"Freight that moves with the".split(" ").map((w, i) => (
+                <span className="word" style={{ ["--i" as string]: i }} key={i}>
+                  <span>{w}</span>
+                </span>
+              ))}
+              <span className="word" style={{ ["--i" as string]: 5 }}>
+                <span className="accent">pack.</span>
+              </span>
             </h1>
             <p className="lead">
               {company.shortName} delivers reliable, on-time full-truckload and
