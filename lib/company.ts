@@ -71,6 +71,31 @@ export const stats = [
   { value: "2023", label: "Proudly Incorporated" },
 ] as const;
 
+// Fleet / equipment. Edit these to match your actual equipment and specs.
+export const fleet = [
+  {
+    name: "53' Dry Van",
+    specs: "Up to 45,000 lbs · 26 pallets",
+    description:
+      "Our workhorse trailer — sealed and weather-protected for palletized freight, packaged goods, and general commodities.",
+    icon: "box",
+  },
+  {
+    name: "Cross-Border Rigs",
+    specs: "PARS / PAPS ready · Bonded",
+    description:
+      "Tractors and trailers set up for smooth Canada–US crossings, with drivers experienced at every major border point.",
+    icon: "border",
+  },
+  {
+    name: "Power-Only / Team",
+    specs: "Solo & team drivers",
+    description:
+      "Need just the tractor for your trailer, or non-stop team coverage for long hauls? We keep freight moving day and night.",
+    icon: "truck",
+  },
+] as const;
+
 export const whyChooseUs = [
   {
     title: "Licensed & Incorporated",

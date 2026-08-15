@@ -11,7 +11,7 @@ import {
   PinIcon,
   ClockIcon,
 } from "@/components/Icons";
-import { company, services, stats, whyChooseUs } from "@/lib/company";
+import { company, services, stats, whyChooseUs, fleet } from "@/lib/company";
 
 export default function Home() {
   return (
@@ -139,6 +139,37 @@ export default function Home() {
                   </div>
                   <h3>{svc.title}</h3>
                   <p>{svc.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- FLEET ---------------- */}
+      <section id="fleet" className="fleet section-pad">
+        <div className="container">
+          <span className="eyebrow">Our Equipment</span>
+          <h2 className="section-title">A fleet built to keep its promise</h2>
+          <p className="section-lead">
+            Well-maintained, safety-inspected equipment ready for the lanes you
+            run. Don&apos;t see exactly what you need? Ask us — we&apos;ll find
+            the right capacity.
+          </p>
+
+          <div className="fleet-grid">
+            {fleet.map((unit) => {
+              const Icon = iconMap[unit.icon as keyof typeof iconMap];
+              return (
+                <div className="fleet-card" key={unit.name}>
+                  <div className="fleet-card-head">
+                    <span className="fleet-icon">
+                      <Icon size={24} />
+                    </span>
+                    <h3>{unit.name}</h3>
+                  </div>
+                  <span className="fleet-spec">{unit.specs}</span>
+                  <p>{unit.description}</p>
                 </div>
               );
             })}
