@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import QuoteForm from "@/components/QuoteForm";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
-import HeroTruck from "@/components/HeroTruck";
 import CoverageMap from "@/components/CoverageMap";
 import {
   iconMap,
@@ -29,9 +28,15 @@ export default function Home() {
       <span id="top" />
       <Header />
 
-      {/* ---------------- HERO ---------------- */}
+      {/* ---------------- HERO (full-width truck banner) ---------------- */}
       <section className="hero">
-        <div className="hero-glow" aria-hidden="true" />
+        <div
+          className="hero-photo"
+          style={{ backgroundImage: "url(/images/hero/truck-blue.jpg)" }}
+          aria-hidden="true"
+        />
+        <div className="hero-overlay" aria-hidden="true" />
+
         <div className="container hero-inner">
           <span className="hero-pill">
             <span className="tag">Active</span>
@@ -65,7 +70,7 @@ export default function Home() {
             <a href="#contact" className="btn btn-primary">
               Get a Free Quote <ArrowIcon />
             </a>
-            <a href="#services" className="btn btn-ghost">
+            <a href="#services" className="btn btn-white">
               Explore Services
             </a>
           </div>
@@ -80,8 +85,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <HeroTruck />
         </div>
       </section>
 
