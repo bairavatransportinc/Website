@@ -87,6 +87,13 @@ export default function Home() {
             ))}
           </div>
         </div>
+
+        <a href="#services" className="hero-scroll" aria-label="Scroll to content">
+          <span className="hero-scroll-text">Scroll</span>
+          <span className="hero-scroll-mouse">
+            <span className="hero-scroll-dot" />
+          </span>
+        </a>
       </section>
 
       {/* ---------------- MARQUEE STRIP ---------------- */}
@@ -108,11 +115,11 @@ export default function Home() {
       {/* ---------------- SERVICES ---------------- */}
       <section id="services" className="section-pad">
         <div className="container">
-          <Reveal variant="up">
-            <span className="eyebrow">What We Haul</span>
+          <Reveal variant="up" className="section-head-center">
+            <span className="eyebrow badge">What We Haul</span>
             <h2 className="section-title">
-              <span className="title-underline">Freight solutions</span> built for
-              reliability
+              Freight solutions built for{" "}
+              <span className="title-underline">reliability</span>
             </h2>
             <p className="section-lead">
               Whatever you're shipping and wherever it's headed, we have the
@@ -131,6 +138,9 @@ export default function Home() {
                   className="service-card"
                   key={svc.title}
                 >
+                  <span className="service-num">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                   <div className="service-icon">
                     <Icon size={26} />
                   </div>
@@ -146,10 +156,11 @@ export default function Home() {
       {/* ---------------- FLEET ---------------- */}
       <section id="fleet" className="fleet section-pad">
         <div className="container">
-          <Reveal variant="up">
-            <span className="eyebrow">Our Equipment</span>
+          <Reveal variant="up" className="section-head-center">
+            <span className="eyebrow badge">Our Equipment</span>
             <h2 className="section-title">
-              A fleet built to <span className="title-underline">keep its promise</span>
+              A fleet built to{" "}
+              <span className="title-underline">keep its promise</span>
             </h2>
             <p className="section-lead">
               Well-maintained, safety-inspected equipment ready for the lanes
@@ -315,7 +326,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- CONTACT ---------------- */}
-      <section id="contact" className="section-pad">
+      <section id="contact" className="contact-section section-pad">
         <div className="container">
           <Reveal variant="up">
             <span className="eyebrow">Get in Touch</span>
