@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { company } from "@/lib/company";
 import { QuoteProvider } from "@/components/QuoteModal";
 import FloatingActions from "@/components/FloatingActions";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
@@ -68,6 +69,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Preloader />
         <QuoteProvider>
           {children}
           <FloatingActions />
