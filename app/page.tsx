@@ -41,7 +41,9 @@ export default function Home() {
         <div className="container hero-inner">
           <span className="hero-pill">
             <span className="tag">Active</span>
-            Brampton, Ontario · Canada &amp; US carrier
+            <span className="hero-pill-text">
+              Brampton, ON · <span className="pill-long">Canada &amp; US carrier</span>
+            </span>
           </span>
 
           <h1 className="hero-title" aria-label="Freight that moves with the pack.">
