@@ -41,6 +41,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset anchor targets so the fixed header doesn't cover section tops
+   when a nav tab scrolls to a section. */
+section[id],
+span[id] {
+  scroll-margin-top: 96px;
+}
+
 html,
 body {
   max-width: 100%;
@@ -771,17 +778,18 @@ section {
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 16px;
 }
 .field {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .field label {
   display: block;
-  font-size: 0.86rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--ink-2);
-  margin-bottom: 8px;
+  margin-bottom: 7px;
+  letter-spacing: 0.01em;
 }
 .field input,
 .field textarea,
@@ -790,15 +798,17 @@ section {
   background: var(--surface-2);
   border: 1.5px solid var(--line);
   border-radius: 12px;
-  padding: 13px 15px;
+  padding: 12px 14px;
   color: var(--ink);
   font-family: inherit;
   font-size: 0.95rem;
+  line-height: 1.4;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 .field input::placeholder,
 .field textarea::placeholder {
-  color: var(--slate-2);
+  color: #aeb6cc;
+  font-weight: 400;
 }
 .field input:focus,
 .field textarea:focus,
@@ -1494,19 +1504,22 @@ section {
   height: auto;
   overflow: visible;
 }
-.cm-land path {
-  fill: rgba(47, 91, 255, 0.08);
-  stroke: rgba(91, 130, 255, 0.4);
+.cm-continent {
+  fill: url(#landGrad);
+  stroke: rgba(91, 130, 255, 0.55);
   stroke-width: 1.5;
+  filter: drop-shadow(0 8px 24px rgba(47, 91, 255, 0.25));
 }
-.cm-canada {
-  fill: rgba(47, 91, 255, 0.12) !important;
+.cm-lakes {
+  fill: #0b1020;
+  stroke: rgba(91, 130, 255, 0.3);
+  stroke-width: 1;
 }
 .cm-hub-ring {
   fill: none;
   stroke: var(--blue-400);
   stroke-width: 2;
-  transform-origin: 250px 150px;
+  transform-origin: 300px 168px;
   animation: hubPulse 2.4s ease-out infinite;
 }
 @keyframes hubPulse {
@@ -1585,4 +1598,88 @@ section {
     stroke-dasharray: none;
     stroke-dashoffset: 0;
   }
+}
+
+/* =====================================================
+   QUOTE MODAL
+   ===================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(6, 10, 24, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+  animation: overlayIn 0.25s ease;
+}
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 40px 90px rgba(6, 10, 24, 0.4);
+  padding: 40px;
+  margin: auto;
+  animation: modalIn 0.35s var(--ease-spring);
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--slate);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.modal-close:hover {
+  background: var(--blue-50);
+  color: var(--blue-600);
+  transform: rotate(90deg);
+}
+.modal-head {
+  margin-bottom: 26px;
+}
+.modal-head h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin: 10px 0 8px;
+}
+.modal-head p {
+  color: var(--slate);
+  font-size: 0.98rem;
+}
+/* Inside the modal the form card shouldn't double up borders/shadow */
+.modal-card .contact-form {
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  background: transparent;
+}
+@media (max-width: 640px) {
+  .modal-card {
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+  .modal-head h3 { font-size: 1.35rem; }
 }

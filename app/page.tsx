@@ -4,6 +4,7 @@ import QuoteForm from "@/components/QuoteForm";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 import CoverageMap from "@/components/CoverageMap";
+import { QuoteButton } from "@/components/QuoteModal";
 import {
   iconMap,
   ShieldIcon,
@@ -67,9 +68,9 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <a href="#contact" className="btn btn-primary">
+            <QuoteButton className="btn btn-primary">
               Get a Free Quote <ArrowIcon />
-            </a>
+            </QuoteButton>
             <a href="#services" className="btn btn-white">
               Explore Services
             </a>
@@ -299,9 +300,9 @@ export default function Home() {
               honest quote and reliable capacity — no runaround.
             </p>
             <div className="hero-actions">
-              <a href="#contact" className="btn btn-amber">
+              <QuoteButton className="btn btn-amber">
                 Get a Free Quote <ArrowIcon />
-              </a>
+              </QuoteButton>
               <a
                 href={`tel:${company.contact.phone.replace(/[^+\d]/g, "")}`}
                 className="btn btn-ghost"

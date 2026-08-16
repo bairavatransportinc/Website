@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { company } from "@/lib/company";
+import { QuoteButton } from "./QuoteModal";
 
 const links = [
   { href: "#services", label: "Services" },
@@ -23,10 +24,10 @@ export default function Header() {
             <Image
               src="/images/logo.png"
               alt={company.name}
-              width={180}
-              height={78}
+              width={201}
+              height={91}
               priority
-              style={{ height: 34, width: "auto" }}
+              style={{ height: 38, width: "auto" }}
             />
           </a>
 
@@ -41,9 +42,7 @@ export default function Header() {
           </nav>
 
           <div className="nav-cta">
-            <a href="#contact" className="btn btn-primary">
-              Get a Quote
-            </a>
+            <QuoteButton className="btn btn-primary">Get a Quote</QuoteButton>
             <button
               className="mobile-toggle"
               aria-label="Toggle menu"
@@ -62,14 +61,7 @@ export default function Header() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="btn btn-primary"
-              style={{ justifyContent: "center", marginTop: 6 }}
-              onClick={() => setOpen(false)}
-            >
-              Get a Quote
-            </a>
+            <QuoteButton className="btn btn-primary">Get a Quote</QuoteButton>
           </div>
         )}
       </div>
