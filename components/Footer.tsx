@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { company } from "@/lib/company";
 
 export default function Footer() {
@@ -37,7 +38,7 @@ export default function Footer() {
                 <a href="#about">About Us</a>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <a href="#footer">Contact</a>
               </li>
             </ul>
           </div>
@@ -64,6 +65,11 @@ export default function Footer() {
         <div className="footer-bottom">
           <span>
             © {year} {company.name} All rights reserved.
+          </span>
+          <span className="footer-legal">
+            <Link href="/privacy">Privacy</Link>
+            <span className="dot-sep">·</span>
+            <Link href="/terms">Terms</Link>
           </span>
           <span>
             Ontario Business Corp. · BN {company.businessNumber} · Registry ID{" "}
