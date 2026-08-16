@@ -1,19 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import QuoteForm from "@/components/QuoteForm";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
 import CoverageMap from "@/components/CoverageMap";
 import { QuoteButton } from "@/components/QuoteModal";
-import {
-  iconMap,
-  ShieldIcon,
-  ArrowIcon,
-  PhoneIcon,
-  MailIcon,
-  PinIcon,
-  ClockIcon,
-} from "@/components/Icons";
+import { iconMap, ShieldIcon, ArrowIcon } from "@/components/Icons";
 import {
   company,
   services,
@@ -285,12 +276,6 @@ export default function Home() {
                 <span className="v">{company.registeredOffice}</span>
               </div>
               <div className="cred-row">
-                <span className="k">Status</span>
-                <span className="v">
-                  <span className="status-pill">{company.status}</span>
-                </span>
-              </div>
-              <div className="cred-row">
                 <span className="k">Business Type</span>
                 <span className="v">{company.businessType}</span>
               </div>
@@ -324,67 +309,6 @@ export default function Home() {
               </a>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ---------------- CONTACT ---------------- */}
-      <section id="contact" className="contact-section section-pad">
-        <div className="container">
-          <Reveal variant="up">
-            <span className="eyebrow">Get in Touch</span>
-            <h2 className="section-title">
-              Request a <span className="title-underline">quote</span>
-            </h2>
-            <p className="section-lead">
-              Fill out the form and a dispatcher will reach out with pricing and
-              availability. Prefer to talk? Our lines are open 24/7.
-            </p>
-          </Reveal>
-
-          <div className="contact-grid" style={{ marginTop: 48 }}>
-            <div className="contact-info">
-              <Reveal variant="left" delay={0} className="contact-item">
-                <span className="ci-icon">
-                  <PhoneIcon size={20} />
-                </span>
-                <div>
-                  <div className="k">Phone</div>
-                  <div className="v">{company.contact.phone}</div>
-                </div>
-              </Reveal>
-              <Reveal variant="left" delay={80} className="contact-item">
-                <span className="ci-icon">
-                  <MailIcon size={20} />
-                </span>
-                <div>
-                  <div className="k">Email</div>
-                  <div className="v">{company.contact.email}</div>
-                </div>
-              </Reveal>
-              <Reveal variant="left" delay={160} className="contact-item">
-                <span className="ci-icon">
-                  <PinIcon size={20} />
-                </span>
-                <div>
-                  <div className="k">Location</div>
-                  <div className="v">{company.contact.address}</div>
-                </div>
-              </Reveal>
-              <Reveal variant="left" delay={240} className="contact-item">
-                <span className="ci-icon">
-                  <ClockIcon size={20} />
-                </span>
-                <div>
-                  <div className="k">Hours</div>
-                  <div className="v">{company.contact.hours}</div>
-                </div>
-              </Reveal>
-            </div>
-
-            <Reveal variant="right">
-              <QuoteForm />
-            </Reveal>
-          </div>
         </div>
       </section>
 
