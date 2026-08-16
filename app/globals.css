@@ -1782,3 +1782,80 @@ section {
 .fleet-grid {
   margin-top: 48px;
 }
+
+/* =====================================================
+   FLOATING ACTIONS (sticky quote + back-to-top)
+   ===================================================== */
+.floating-actions {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-smooth),
+    transform 0.3s var(--ease-spring);
+}
+.floating-actions.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.fab {
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s ease,
+    background 0.2s ease;
+}
+.fab-quote {
+  gap: 9px;
+  background: var(--blue-500);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 14px 22px;
+  border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(47, 91, 255, 0.4);
+}
+.fab-quote:hover {
+  background: var(--blue-600);
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(47, 91, 255, 0.5);
+}
+.fab-top {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-md);
+}
+.fab-top:hover {
+  transform: translateY(-3px);
+  color: var(--blue-600);
+  border-color: var(--blue-400);
+}
+@media (max-width: 640px) {
+  .floating-actions {
+    right: 16px;
+    bottom: 16px;
+    gap: 10px;
+  }
+  /* on phones show just the icon for the quote button to save space */
+  .fab-quote span {
+    display: none;
+  }
+  .fab-quote {
+    width: 52px;
+    height: 52px;
+    padding: 0;
+  }
+}
