@@ -117,7 +117,7 @@ export default function QuoteForm() {
         </div>
         <div className="field">
           <label htmlFor="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" />
+          <input id="phone" name="phone" type="tel" placeholder="(647) 000-0000" />
         </div>
       </div>
 

@@ -65,33 +65,33 @@ export const services = [
 ] as const;
 
 export const stats = [
-  { value: "48", label: "US States & Provinces Served" },
-  { value: "24/7", label: "Dispatch Availability" },
-  { value: "100%", label: "On-Time Commitment" },
-  { value: "2023", label: "Proudly Incorporated" },
+  { value: "2023", label: "Ontario Incorporated" },
+  { value: "24/7", label: "Dispatch & Tracking" },
+  { value: "CA ↔ US", label: "Cross-Border Freight" },
+  { value: "FTL", label: "Full-Truckload Focus" },
 ] as const;
 
 // Fleet / equipment. Edit these to match your actual equipment and specs.
 export const fleet = [
   {
-    name: "53' Dry Van",
-    specs: "Up to 45,000 lbs · 26 pallets",
+    name: "Dry Van",
+    specs: "53' trailers",
     description:
-      "Our workhorse trailer — sealed and weather-protected for palletized freight, packaged goods, and general commodities.",
+      "Sealed, weather-protected trailers for palletized freight, packaged goods, and general commodities.",
     icon: "box",
   },
   {
-    name: "Cross-Border Rigs",
-    specs: "PARS / PAPS ready · Bonded",
+    name: "Cross-Border Ready",
+    specs: "PARS / PAPS",
     description:
-      "Tractors and trailers set up for smooth Canada–US crossings, with drivers experienced at every major border point.",
+      "Equipment and paperwork set up for Canada–US crossings, with drivers familiar with the main border points.",
     icon: "border",
   },
   {
-    name: "Power-Only / Team",
-    specs: "Solo & team drivers",
+    name: "Power-Only",
+    specs: "Bring your trailer",
     description:
-      "Need just the tractor for your trailer, or non-stop team coverage for long hauls? We keep freight moving day and night.",
+      "Just need a tractor to move your trailer? We can provide the power and the driver to keep it rolling.",
     icon: "truck",
   },
 ] as const;

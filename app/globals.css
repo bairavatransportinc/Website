@@ -1498,22 +1498,43 @@ section {
   height: auto;
   overflow: visible;
 }
-.cm-continent {
-  fill: url(#landGrad);
-  stroke: rgba(91, 130, 255, 0.55);
-  stroke-width: 1.5;
-  filter: drop-shadow(0 8px 24px rgba(47, 91, 255, 0.25));
+/* Landmass backdrop */
+.cm-land {
+  fill: rgba(47, 91, 255, 0.07);
+  stroke: rgba(91, 130, 255, 0.35);
+  stroke-width: 1.4;
 }
-.cm-lakes {
-  fill: #0b1020;
-  stroke: rgba(91, 130, 255, 0.3);
-  stroke-width: 1;
+
+/* Highways: wide dim base line = asphalt */
+.cm-road-base {
+  fill: none;
+  stroke: rgba(91, 130, 255, 0.28);
+  stroke-width: 5;
+  stroke-linecap: round;
 }
+/* Flowing dashes on top = traffic moving along the highway */
+.cm-road-flow {
+  fill: none;
+  stroke: url(#roadGrad);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 10 18;
+  animation: roadFlow 1.4s linear infinite;
+  filter: drop-shadow(0 0 4px rgba(47, 91, 255, 0.5));
+}
+@keyframes roadFlow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+
+/* Hub pulsing ring */
 .cm-hub-ring {
   fill: none;
   stroke: var(--blue-400);
   stroke-width: 2;
-  transform-origin: 300px 168px;
+  transform-box: fill-box;
+  transform-origin: center;
   animation: hubPulse 2.4s ease-out infinite;
 }
 @keyframes hubPulse {
@@ -1522,52 +1543,40 @@ section {
     opacity: 0.9;
   }
   100% {
-    transform: scale(2.4);
+    transform: scale(2.6);
     opacity: 0;
   }
 }
-.cm-pin {
+
+/* Destination city dots */
+.cm-city {
   fill: var(--amber);
-  animation: pinPop 2.6s ease-in-out infinite;
+  stroke: #0b1020;
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cityPop 2.8s ease-in-out infinite;
 }
-.cm-pin:nth-of-type(2) {
-  animation-delay: 0.4s;
+.cm-city:nth-of-type(2) { animation-delay: 0.3s; }
+.cm-city:nth-of-type(3) { animation-delay: 0.6s; }
+.cm-city:nth-of-type(4) { animation-delay: 0.9s; }
+.cm-city:nth-of-type(5) { animation-delay: 1.2s; }
+@keyframes cityPop {
+  0%, 72%, 100% { transform: scale(1); }
+  84% { transform: scale(1.4); }
 }
-.cm-pin:nth-of-type(3) {
-  animation-delay: 0.8s;
+
+/* City labels */
+.cm-label {
+  fill: #aeb8d6;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-sans);
 }
-.cm-pin:nth-of-type(4) {
-  animation-delay: 1.2s;
-}
-@keyframes pinPop {
-  0%,
-  70%,
-  100% {
-    transform: scale(1);
-  }
-  85% {
-    transform: scale(1.5);
-  }
-}
-/* lanes draw themselves in a loop */
-.cm-lane {
-  stroke-dasharray: 6 240;
-  stroke-dashoffset: 246;
-  animation: laneFlow 2.6s linear infinite;
-}
-.cm-lane-2 {
-  animation-delay: 0.5s;
-}
-.cm-lane-3 {
-  animation-delay: 1s;
-}
-.cm-lane-4 {
-  animation-delay: 1.5s;
-}
-@keyframes laneFlow {
-  to {
-    stroke-dashoffset: 0;
-  }
+.cm-label-hub {
+  fill: #fff;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 @media (max-width: 900px) {
@@ -1577,20 +1586,16 @@ section {
   }
   .coverage-map {
     order: -1;
-    max-width: 460px;
+    max-width: 480px;
     margin: 0 auto;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .cm-hub-ring,
-  .cm-pin,
-  .cm-lane {
+  .cm-city,
+  .cm-road-flow {
     animation: none;
-  }
-  .cm-lane {
-    stroke-dasharray: none;
-    stroke-dashoffset: 0;
   }
 }
 
