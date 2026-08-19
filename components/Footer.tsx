@@ -78,7 +78,7 @@ export default function Footer() {
             <span className="dot-sep">·</span>
             <RefreshCacheButton />
           </span>
-          <span>Registered Ontario Business Corporation · Brampton, ON</span>
+          <span>Registered Ontario Carrier</span>
         </div>
       </div>
     </footer>
