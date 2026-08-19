@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { company } from "@/lib/company";
 import { QuoteProvider } from "@/components/QuoteModal";
+import { LanguageProvider } from "@/lib/i18n";
 import FloatingActions from "@/components/FloatingActions";
+import ScrollProgress from "@/components/ScrollProgress";
 import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.bairavatransport.ca"),
+  metadataBase: new URL("https://www.bairavatransportinc.ca"),
   title: {
     default: `${company.name} — Reliable Freight Across Canada & the US`,
     template: `%s | ${company.name}`,
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${company.name} — Reliable Freight Across Canada & the US`,
     description: company.description,
-    url: "https://www.bairavatransport.ca",
+    url: "https://www.bairavatransportinc.ca",
     siteName: company.name,
     type: "website",
     locale: "en_CA",
@@ -70,10 +72,13 @@ export default function RootLayout({
       </head>
       <body>
         <Preloader />
-        <QuoteProvider>
-          {children}
-          <FloatingActions />
-        </QuoteProvider>
+        <LanguageProvider>
+          <QuoteProvider>
+            <ScrollProgress />
+            {children}
+            <FloatingActions />
+          </QuoteProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

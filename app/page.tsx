@@ -1,3 +1,5 @@
+"use client";
+
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -5,16 +7,12 @@ import CountUp from "@/components/CountUp";
 import CoverageMap from "@/components/CoverageMap";
 import { QuoteButton } from "@/components/QuoteModal";
 import { iconMap, ShieldIcon, ArrowIcon } from "@/components/Icons";
-import {
-  company,
-  services,
-  stats,
-  whyChooseUs,
-  fleet,
-  coverage,
-} from "@/lib/company";
+import { company, coverageLanes } from "@/lib/company";
+import { useI18n } from "@/lib/i18n";
 
 export default function Home() {
+  const { t } = useI18n();
+
   return (
     <>
       <span id="top" />
@@ -31,46 +29,44 @@ export default function Home() {
 
         <div className="container hero-inner">
           <span className="hero-pill">
-            <span className="tag">Active</span>
-            <span className="hero-pill-text">
-              Brampton, ON · <span className="pill-long">Canada &amp; US carrier</span>
-            </span>
+            <span className="tag">{t.hero.badge}</span>
+            <span className="hero-pill-text">{t.hero.location}</span>
           </span>
 
-          <h1 className="hero-title" aria-label="Freight that moves with the pack.">
-            {"Freight that moves".split(" ").map((w, i) => (
+          <h1 className="hero-title">
+            {t.hero.titleLine1.split(" ").map((w, i) => (
               <span className="word" style={{ ["--i" as string]: i }} key={i}>
                 <span>{w}</span>
               </span>
             ))}
-            <span className="word" style={{ ["--i" as string]: 3 }}>
-              <span>with</span>
-            </span>
-            <span className="word" style={{ ["--i" as string]: 4 }}>
-              <span>the</span>
-            </span>
+            {t.hero.titleWith && (
+              <span className="word" style={{ ["--i" as string]: 3 }}>
+                <span>{t.hero.titleWith}</span>
+              </span>
+            )}
+            {t.hero.titleThe && (
+              <span className="word" style={{ ["--i" as string]: 4 }}>
+                <span>{t.hero.titleThe}</span>
+              </span>
+            )}
             <span className="word" style={{ ["--i" as string]: 5 }}>
-              <span className="accent">pack.</span>
+              <span className="accent">{t.hero.titlePack}</span>
             </span>
           </h1>
 
-          <p className="lead">
-            {company.shortName} delivers reliable, on-time full-truckload and
-            cross-border freight across Canada and the United States — fast,
-            tracked, and backed by 24/7 dispatch.
-          </p>
+          <p className="lead">{t.hero.lead}</p>
 
           <div className="hero-actions">
             <QuoteButton className="btn btn-primary">
-              Get a Free Quote <ArrowIcon />
+              {t.hero.getQuote} <ArrowIcon />
             </QuoteButton>
             <a href="#services" className="btn btn-white">
-              Explore Services
+              {t.hero.explore}
             </a>
           </div>
 
           <div className="hero-trust">
-            {stats.map((s) => (
+            {t.stats.map((s) => (
               <div className="item" key={s.label}>
                 <strong>
                   <CountUp value={s.value} />
@@ -81,8 +77,8 @@ export default function Home() {
           </div>
         </div>
 
-        <a href="#services" className="hero-scroll" aria-label="Scroll to content">
-          <span className="hero-scroll-text">Scroll</span>
+        <a href="#services" className="hero-scroll" aria-label={t.hero.scroll}>
+          <span className="hero-scroll-text">{t.hero.scroll}</span>
           <span className="hero-scroll-mouse">
             <span className="hero-scroll-dot" />
           </span>
@@ -94,12 +90,11 @@ export default function Home() {
         <div className="strip-track">
           {[...Array(2)].map((_, dup) => (
             <div key={dup} style={{ display: "flex", gap: 56 }}>
-              <span className="strip-item">Full Truckload</span>
-              <span className="strip-item">Cross-Border Freight</span>
-              <span className="strip-item">Dry Van</span>
-              <span className="strip-item">Dedicated Lanes</span>
-              <span className="strip-item">Expedited Delivery</span>
-              <span className="strip-item">24/7 Dispatch</span>
+              {t.strip.map((item, i) => (
+                <span className="strip-item" key={`${dup}-${i}`}>
+                  {item}
+                </span>
+              ))}
             </div>
           ))}
         </div>
@@ -109,20 +104,16 @@ export default function Home() {
       <section id="services" className="section-pad">
         <div className="container">
           <Reveal variant="up" className="section-head-center">
-            <span className="eyebrow badge">What We Haul</span>
+            <span className="eyebrow badge">{t.services.eyebrow}</span>
             <h2 className="section-title">
-              Freight solutions built for{" "}
-              <span className="title-underline">reliability</span>
+              {t.services.title1}
+              <span className="title-underline">{t.services.titleAccent}</span>
             </h2>
-            <p className="section-lead">
-              Whatever you're shipping and wherever it's headed, we have the
-              capacity and the discipline to get it there safely and on
-              schedule.
-            </p>
+            <p className="section-lead">{t.services.lead}</p>
           </Reveal>
 
           <div className="services-grid">
-            {services.map((svc, i) => {
+            {t.services.items.map((svc, i) => {
               const Icon = iconMap[svc.icon as keyof typeof iconMap];
               return (
                 <Reveal
@@ -150,20 +141,16 @@ export default function Home() {
       <section id="fleet" className="fleet section-pad">
         <div className="container">
           <Reveal variant="up" className="section-head-center">
-            <span className="eyebrow badge">Our Equipment</span>
+            <span className="eyebrow badge">{t.fleet.eyebrow}</span>
             <h2 className="section-title">
-              A fleet built to{" "}
-              <span className="title-underline">keep its promise</span>
+              {t.fleet.title1}
+              <span className="title-underline">{t.fleet.titleAccent}</span>
             </h2>
-            <p className="section-lead">
-              Well-maintained, safety-inspected equipment ready for the lanes
-              you run. Don&apos;t see exactly what you need? Ask us — we&apos;ll
-              find the right capacity.
-            </p>
+            <p className="section-lead">{t.fleet.lead}</p>
           </Reveal>
 
           <div className="fleet-grid">
-            {fleet.map((unit, i) => {
+            {t.fleet.items.map((unit, i) => {
               const Icon = iconMap[unit.icon as keyof typeof iconMap];
               return (
                 <Reveal
@@ -191,19 +178,15 @@ export default function Home() {
       <section id="coverage" className="coverage section-pad">
         <div className="container coverage-grid">
           <Reveal variant="left">
-            <span className="eyebrow">Where We Run</span>
+            <span className="eyebrow">{t.coverage.eyebrow}</span>
             <h2 className="section-title">
-              Coverage across{" "}
-              <span className="title-underline">Canada &amp; the US</span>
+              {t.coverage.title1}
+              <span className="title-underline">{t.coverage.titleAccent}</span>
             </h2>
-            <p className="section-lead">
-              From our Brampton base we run freight throughout Ontario and Quebec
-              and cross-border into the US heartland — the Great Lakes, Midwest,
-              Northeast, and down to Texas.
-            </p>
+            <p className="section-lead">{t.coverage.lead}</p>
 
             <div className="coverage-regions">
-              {coverage.regions.map((r) => (
+              {t.coverage.regions.map((r) => (
                 <span className="coverage-chip" key={r}>
                   {r}
                 </span>
@@ -211,7 +194,7 @@ export default function Home() {
             </div>
 
             <div className="coverage-lanes">
-              {coverage.lanes.map((lane) => (
+              {coverageLanes.map((lane) => (
                 <div className="lane-row" key={`${lane.from}-${lane.to}`}>
                   <span className="from">{lane.from}</span>
                   <span className="arrow" />
@@ -231,20 +214,15 @@ export default function Home() {
       <section id="about" className="about section-pad">
         <div className="container about-grid">
           <Reveal variant="left">
-            <span className="eyebrow">Who We Are</span>
+            <span className="eyebrow">{t.about.eyebrow}</span>
             <h2 className="section-title">
-              A registered Ontario carrier you can{" "}
-              <span className="title-underline">trust</span>
+              {t.about.title1}
+              <span className="title-underline">{t.about.titleAccent}</span>
             </h2>
-            <p className="section-lead">
-              {company.name} is a Brampton-based transport company built on a
-              simple promise: move freight the way we'd want ours moved — on
-              time, in full, and with honest communication every mile of the
-              way.
-            </p>
+            <p className="section-lead">{t.about.lead}</p>
 
             <div className="about-features">
-              {whyChooseUs.map((f) => (
+              {t.about.features.map((f) => (
                 <div className="feature" key={f.title}>
                   <span className="dot">
                     <ShieldIcon size={18} />
@@ -258,32 +236,20 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* Real incorporation credentials from the Ontario registry */}
-          <Reveal variant="right" className="credentials">
-            <span className="verified">✓ Verified · Ontario Business Registry</span>
+          {/* Trust card — conveys credibility without exposing registry
+              identifiers (BN / registry ID) that could be misused. */}
+          <Reveal variant="right" className="credentials trust-card">
+            <span className="verified">{t.about.credVerified}</span>
             <h3>{company.name}</h3>
-            <div style={{ marginTop: 18 }}>
-              <div className="cred-row">
-                <span className="k">Business Number (BN)</span>
-                <span className="v">{company.businessNumber}</span>
-              </div>
-              <div className="cred-row">
-                <span className="k">Registry ID</span>
-                <span className="v">{company.registryId}</span>
-              </div>
-              <div className="cred-row">
-                <span className="k">Registered Office</span>
-                <span className="v">{company.registeredOffice}</span>
-              </div>
-              <div className="cred-row">
-                <span className="k">Business Type</span>
-                <span className="v">{company.businessType}</span>
-              </div>
-              <div className="cred-row">
-                <span className="k">Incorporated</span>
-                <span className="v">{company.incorporatedDate}</span>
-              </div>
-            </div>
+            <p className="trust-lead">{t.about.trustLead}</p>
+            <ul className="trust-points">
+              {t.about.trustPoints.map((point) => (
+                <li key={point}>
+                  <ShieldIcon size={18} />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>
@@ -292,20 +258,17 @@ export default function Home() {
       <section id="why" className="section-pad">
         <div className="container">
           <Reveal variant="scale" className="cta-band">
-            <h2>Ready to move your freight?</h2>
-            <p>
-              Tell us where it's going. Our dispatch team will get you a quick,
-              honest quote and reliable capacity — no runaround.
-            </p>
+            <h2>{t.cta.title}</h2>
+            <p>{t.cta.lead}</p>
             <div className="hero-actions">
               <QuoteButton className="btn btn-amber">
-                Get a Free Quote <ArrowIcon />
+                {t.cta.getQuote} <ArrowIcon />
               </QuoteButton>
               <a
                 href={`tel:${company.contact.phone.replace(/[^+\d]/g, "")}`}
                 className="btn btn-ghost"
               >
-                Call Dispatch
+                {t.cta.call}
               </a>
             </div>
           </Reveal>

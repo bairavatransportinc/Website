@@ -3,9 +3,12 @@
 import { useState } from "react";
 import { ArrowIcon } from "./Icons";
 import { company } from "@/lib/company";
+import { useI18n } from "@/lib/i18n";
 
 export default function QuoteForm() {
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useI18n();
+  const q = t.quote;
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -28,7 +31,7 @@ export default function QuoteForm() {
     }`;
 
     const bodyLines = [
-      "New quote request via bairavatransport.ca",
+      "New quote request via bairavatransportinc.ca",
       "",
       `Name:        ${name || "—"}`,
       `Company:     ${companyName || "—"}`,
@@ -56,17 +59,10 @@ export default function QuoteForm() {
     return (
       <div className="contact-form" style={{ textAlign: "center" }}>
         <div style={{ fontSize: "2.5rem", marginBottom: 12 }}>📧</div>
-        <h3 style={{ fontSize: "1.4rem", marginBottom: 8 }}>
-          Your email is ready to send
-        </h3>
-        <p style={{ color: "var(--fg-muted)" }}>
-          We&apos;ve opened your email app with the request pre-filled to{" "}
-          <strong>{company.contact.email}</strong>. Just press{" "}
-          <strong>Send</strong> and our dispatch team will get back to you with a
-          quote.
-        </p>
+        <h3 style={{ fontSize: "1.4rem", marginBottom: 8 }}>{q.thanksTitle}</h3>
+        <p style={{ color: "var(--fg-muted)" }}>{q.thanksBody}</p>
         <p className="form-note" style={{ marginTop: 16 }}>
-          Nothing opened? Email us directly at{" "}
+          {q.thanksNote}{" "}
           <a
             href={`mailto:${company.contact.email}`}
             style={{ color: "var(--blue-400)", fontWeight: 700 }}
@@ -80,7 +76,7 @@ export default function QuoteForm() {
           style={{ marginTop: 24 }}
           onClick={() => setSubmitted(false)}
         >
-          Fill out another request
+          {q.another}
         </button>
       </div>
     );
@@ -90,11 +86,11 @@ export default function QuoteForm() {
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <div className="field">
-          <label htmlFor="name">Full name</label>
+          <label htmlFor="name">{q.name}</label>
           <input id="name" name="name" type="text" required placeholder="Jane Doe" />
         </div>
         <div className="field">
-          <label htmlFor="company">Company</label>
+          <label htmlFor="company">{q.company}</label>
           <input
             id="company"
             name="company"
@@ -106,7 +102,7 @@ export default function QuoteForm() {
 
       <div className="form-row">
         <div className="field">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{q.email}</label>
           <input
             id="email"
             name="email"
@@ -116,14 +112,14 @@ export default function QuoteForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="phone">Phone</label>
+          <label htmlFor="phone">{q.phone}</label>
           <input id="phone" name="phone" type="tel" placeholder="(647) 000-0000" />
         </div>
       </div>
 
       <div className="form-row">
         <div className="field">
-          <label htmlFor="origin">Pickup location</label>
+          <label htmlFor="origin">{q.pickup}</label>
           <input
             id="origin"
             name="origin"
@@ -132,7 +128,7 @@ export default function QuoteForm() {
           />
         </div>
         <div className="field">
-          <label htmlFor="destination">Delivery location</label>
+          <label htmlFor="destination">{q.delivery}</label>
           <input
             id="destination"
             name="destination"
@@ -143,36 +139,31 @@ export default function QuoteForm() {
       </div>
 
       <div className="field">
-        <label htmlFor="service">Service needed</label>
+        <label htmlFor="service">{q.service}</label>
         <select id="service" name="service" defaultValue="">
           <option value="" disabled>
-            Select a service…
+            {q.serviceSelect}
           </option>
-          <option>Full Truckload (FTL)</option>
-          <option>Cross-Border Freight</option>
-          <option>Dry Van Shipping</option>
-          <option>Dedicated Lanes</option>
-          <option>Expedited Delivery</option>
-          <option>Other</option>
+          {t.services.items.map((svc) => (
+            <option key={svc.title}>{svc.title}</option>
+          ))}
+          <option>{q.serviceOther}</option>
         </select>
       </div>
 
       <div className="field">
-        <label htmlFor="details">Shipment details</label>
+        <label htmlFor="details">{q.details}</label>
         <textarea
           id="details"
           name="details"
-          placeholder="Tell us about your load — weight, dimensions, timeline, and any special requirements."
+          placeholder={q.detailsPlaceholder}
         />
       </div>
 
       <button type="submit" className="btn btn-amber" style={{ width: "100%" }}>
-        Request My Quote <ArrowIcon />
+        {q.submit} <ArrowIcon />
       </button>
-      <p className="form-note">
-        Opens your email app pre-filled to {company.contact.email} — no account
-        needed on our end.
-      </p>
+      <p className="form-note">{q.formNote}</p>
     </form>
   );
 }

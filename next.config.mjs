@@ -6,7 +6,7 @@ const nextConfig = {
   output: "export",
 
   // GitHub Pages serves from a subpath unless a custom domain is used.
-  // We're deploying to a custom domain (bairavatransport.ca) at the root,
+  // We're deploying to a custom domain (bairavatransportinc.ca) at the root,
   // so no basePath is needed.
 
   images: {

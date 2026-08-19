@@ -8,19 +8,15 @@ export const company = {
   description:
     "A Brampton-based Ontario carrier delivering reliable, on-time freight across Canada and cross-border to the United States.",
 
-  // Verified incorporation details
-  businessNumber: "731593943",
-  registryId: "1000456273",
-  registeredOffice: "Brampton, Ontario",
-  status: "Active",
-  statusNotes: "Incorporated",
-  businessType: "Ontario Business Corp.",
-  incorporatedDate: "2023-02-24",
+  // Note: registry identifiers (Business Number, Registry ID) and the exact
+  // incorporation date are intentionally NOT stored here — they were removed
+  // from the public site to avoid misuse. Verify credentials privately via the
+  // Ontario Business Registry if needed.
 
   contact: {
-    email: "contactus@bairavatransport.ca",
+    email: "contactus@bairavatransportinc.ca",
     phone: "+1 (647) 871-9003",
-    address: "61 Circus Cres, Brampton, ON L7A 5E1, Canada",
+    address: "Brampton, Ontario, Canada",
     hours: "24/7 Dispatch",
   },
 } as const;
@@ -96,23 +92,14 @@ export const fleet = [
   },
 ] as const;
 
-// Coverage / lanes. Edit lanes to reflect your busiest routes.
-export const coverage = {
-  regions: [
-    "Ontario",
-    "Quebec",
-    "Great Lakes",
-    "Midwest US",
-    "Northeast US",
-    "Texas & South",
-  ],
-  lanes: [
-    { from: "Toronto, ON", to: "Chicago, IL" },
-    { from: "Brampton, ON", to: "Detroit, MI" },
-    { from: "Montreal, QC", to: "New York, NY" },
-    { from: "Ontario", to: "Texas" },
-  ],
-} as const;
+// Coverage lanes — city names are language-neutral, so they live here (not in
+// the translation dictionary) and render the same in EN and FR.
+export const coverageLanes = [
+  { from: "Toronto, ON", to: "Chicago, IL" },
+  { from: "Brampton, ON", to: "Detroit, MI" },
+  { from: "Montreal, QC", to: "New York, NY" },
+  { from: "Ontario", to: "Texas" },
+] as const;
 
 export const whyChooseUs = [
   {

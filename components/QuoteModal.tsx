@@ -8,6 +8,7 @@ import {
   useCallback,
 } from "react";
 import QuoteForm from "./QuoteForm";
+import { useI18n } from "@/lib/i18n";
 
 type Ctx = { open: () => void; close: () => void; isOpen: boolean };
 const QuoteContext = createContext<Ctx | null>(null);
@@ -20,6 +21,7 @@ export function useQuote() {
 
 export function QuoteProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useI18n();
 
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -47,24 +49,21 @@ export function QuoteProvider({ children }: { children: React.ReactNode }) {
           className="modal-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label="Request a quote"
+          aria-label={t.quote.title}
           onClick={close}
         >
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button
               className="modal-close"
-              aria-label="Close"
+              aria-label={t.quote.close}
               onClick={close}
             >
               ✕
             </button>
             <div className="modal-head">
-              <span className="eyebrow badge">Get a Quote</span>
-              <h3>Request a freight quote</h3>
-              <p>
-                Tell us about your shipment and our dispatch team will get back
-                to you with pricing and availability.
-              </p>
+              <span className="eyebrow badge">{t.quote.eyebrow}</span>
+              <h3>{t.quote.title}</h3>
+              <p>{t.quote.lead}</p>
             </div>
             <QuoteForm />
           </div>

@@ -1,9 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { company } from "@/lib/company";
+import { useI18n } from "@/lib/i18n";
+import RefreshCacheButton from "./RefreshCacheButton";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useI18n();
 
   return (
     <footer id="footer" className="site-footer">
@@ -23,28 +28,28 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Company</h4>
+            <h4>{t.footer.company}</h4>
             <ul>
               <li>
-                <a href="#services">Services</a>
+                <a href="#services">{t.footer.services}</a>
               </li>
               <li>
-                <a href="#fleet">Fleet</a>
+                <a href="#fleet">{t.footer.fleet}</a>
               </li>
               <li>
-                <a href="#coverage">Coverage</a>
+                <a href="#coverage">{t.footer.coverage}</a>
               </li>
               <li>
-                <a href="#about">About Us</a>
+                <a href="#about">{t.footer.about}</a>
               </li>
               <li>
-                <a href="#footer">Contact</a>
+                <a href="#footer">{t.footer.contact}</a>
               </li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Get in Touch</h4>
+            <h4>{t.footer.getInTouch}</h4>
             <ul>
               <li>
                 <a href={`mailto:${company.contact.email}`}>
@@ -64,17 +69,16 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>
-            © {year} {company.name} All rights reserved.
+            © {year} {company.name} {t.footer.rights}
           </span>
           <span className="footer-legal">
             <Link href="/privacy">Privacy</Link>
             <span className="dot-sep">·</span>
             <Link href="/terms">Terms</Link>
+            <span className="dot-sep">·</span>
+            <RefreshCacheButton />
           </span>
-          <span>
-            Ontario Business Corp. · BN {company.businessNumber} · Registry ID{" "}
-            {company.registryId}
-          </span>
+          <span>Registered Ontario Business Corporation · Brampton, ON</span>
         </div>
       </div>
     </footer>

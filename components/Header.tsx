@@ -1,20 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { company } from "@/lib/company";
+import { useI18n } from "@/lib/i18n";
 import { QuoteButton } from "./QuoteModal";
-
-const links = [
-  { href: "#services", label: "Services" },
-  { href: "#fleet", label: "Fleet" },
-  { href: "#coverage", label: "Coverage" },
-  { href: "#about", label: "About" },
-  { href: "#footer", label: "Contact" },
-];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const { t, lang, setLang } = useI18n();
+
+  const links = [
+    { href: "#services", label: t.nav.services },
+    { href: "#fleet", label: t.nav.fleet },
+    { href: "#coverage", label: t.nav.coverage },
+    { href: "#about", label: t.nav.about },
+    { href: "#footer", label: t.nav.contact },
+  ];
+
+  // Highlight the nav link for whichever section is currently in view.
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        // Pick the most-visible section near the top of the viewport.
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(`#${visible[0].target.id}`);
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const LangToggle = () => (
+    <div className="lang-toggle" role="group" aria-label="Language">
+      <button
+        type="button"
+        className={lang === "en" ? "is-active" : ""}
+        aria-pressed={lang === "en"}
+        onClick={() => setLang("en")}
+      >
+        EN
+      </button>
+      <span aria-hidden="true">|</span>
+      <button
+        type="button"
+        className={lang === "fr" ? "is-active" : ""}
+        aria-pressed={lang === "fr"}
+        onClick={() => setLang("fr")}
+      >
+        FR
+      </button>
+    </div>
+  );
 
   return (
     <header className="site-header">
@@ -35,14 +83,23 @@ export default function Header() {
             <ul className="nav-links">
               {links.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href}>{l.label}</a>
+                  <a
+                    href={l.href}
+                    className={active === l.href ? "is-active" : ""}
+                    aria-current={active === l.href ? "true" : undefined}
+                  >
+                    {l.label}
+                  </a>
                 </li>
               ))}
             </ul>
           </nav>
 
           <div className="nav-cta">
-            <QuoteButton className="btn btn-primary">Get a Quote</QuoteButton>
+            <LangToggle />
+            <QuoteButton className="btn btn-primary">
+              {t.nav.getQuote}
+            </QuoteButton>
             <button
               className="mobile-toggle"
               aria-label="Toggle menu"
@@ -61,7 +118,10 @@ export default function Header() {
                 {l.label}
               </a>
             ))}
-            <QuoteButton className="btn btn-primary">Get a Quote</QuoteButton>
+            <LangToggle />
+            <QuoteButton className="btn btn-primary">
+              {t.nav.getQuote}
+            </QuoteButton>
           </div>
         )}
       </div>
